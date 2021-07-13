@@ -17,6 +17,5 @@ export class DateTimeService {
 
   setCurrentDateTime(date: any) {
      this.currentDateTime = date;
-     this.currentDateTime.date = date.date;
   }
 }

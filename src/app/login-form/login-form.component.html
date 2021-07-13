@@ -1,0 +1,11 @@
+<div>
+    <div>
+        <label for="username">Username: </label>
+        <input id="username" [(ngModel)]="_username" placeholder="Username" />
+        <label for="password">Password: </label>
+        <input id="password" [(ngModel)]="_password" placeholder="Password" />
+    </div>
+    <button (click)="login()">Login</button>
+  
+</div>
+<router-outlet></router-outlet>

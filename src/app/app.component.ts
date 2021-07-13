@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Login-Form';
+
+  title = 'Welcome';
+  navMenu = this.loginService;
+
+
+  constructor(
+    private loginService: LoginService
+  )
+  {
+    loginService.checkOnRefresh();
+  }
+
+
+
 }

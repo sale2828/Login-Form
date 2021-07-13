@@ -1,0 +1,28 @@
+<label for="selectedCity" value="">Select City</label>
+<div>
+    <button (click)="this.loadWeather()">Go</button>
+    <input id="selectedCity" [(ngModel)]="_selectedCity" placeholder="selectedCity" />
+</div>
+
+<div id="divWeatherMain">
+    <div *ngIf="weatherService.WeatherData.isDay" class="weatherWidgetRow">
+        <i class="fas fa-3x fa-sun sun"></i>
+    </div>
+    <div *ngIf="!weatherService.WeatherData.isDay" class="weatherWidgetRow">
+        <i class="fas fa-3x fa-moon moon"></i>
+    </div>
+    <div class="weatherWidgetRow cloudDiv">
+        <i class="fas fa-cloud fa-3x cloud"></i>
+    </div>
+    <div class="weatherWidgetRow" style="font-size: 32px;margin-top: 5px;">{{weatherService.WeatherData.temp_celcius}}°</div>
+    <div class="weatherWidgetRow" style="font-size: 12px;">{{weatherService.WeatherData.temp_min}}° / {{weatherService.WeatherData.temp_max}}°</div>
+    <div class="weatherWidgetRow" style="font-size: 12px;">Feels Like: {{weatherService.WeatherData.temp_feels_like}}°</div>
+    <div class="weatherWidgetRow" style="font-size: 25px;margin-top: 10px;">{{weatherService.WeatherData.name}}</div>
+    <div class="weatherWidgetRow" style="font-size: 12px;">Humidity: {{weatherService.WeatherData.main.humidity}}%</div>
+</div>
+<div>
+    <label>{{this.counter}}</label>
+    <button (click)="this.unSubscribe()">Unsubscribe</button>
+</div>
+
+<router-outlet></router-outlet>

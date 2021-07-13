@@ -1,0 +1,22 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DateTimeService {
+
+  constructor(private http: HttpClient) { }
+
+  currentDateTime: any;
+
+  getCurrentDateTime(): Observable<any> {
+    return this.http.get('https://localhost:44395/api/Date');
+  }
+
+  setCurrentDateTime(date: any) {
+     this.currentDateTime = date;
+     this.currentDateTime.date = date.date;
+  }
+}

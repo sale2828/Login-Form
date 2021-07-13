@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
-  CanActivate,
   CanDeactivate,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ComponentCanDeactivate } from '../component-can-deactivate';
+import { ObjectDetailComponent } from '../object-detail/object-detail.component';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DirtycheckGuard implements CanDeactivate<ComponentCanDeactivate> {
+export class DirtycheckGuard implements CanDeactivate<ObjectDetailComponent> {
   canDeactivate(
-    component: ComponentCanDeactivate,
+    component: ObjectDetailComponent,
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot
@@ -28,6 +27,5 @@ export class DirtycheckGuard implements CanDeactivate<ComponentCanDeactivate> {
     } else {
       return confirm('You have unsaved changes. Do you really want to leave the page?');
     }
-    return component.canDeactivate();
   }
 }

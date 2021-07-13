@@ -2,14 +2,12 @@
   <h2>{{ object.name | uppercase }} Details</h2>
   <div><span>id: </span>{{ object.id }}</div>
   <div></div>
-  <div>
+  <form [formGroup]="objectDetails">
     <label for="objectName">New Object Name: </label>
-    <input id="objectName" (change)="isDirty = true" />
+    <input id="objectName" type="text" formControlName="objectName" />
     <label for="objectId">New Object ID: </label>
-    <input id="objectId" (change)="isDirty = true" />
-  </div>
-  <button (click)="save()">Save</button>
-</div>
-<button (click)="goBack()">go back</button>
-<p></p>
-<router-outlet></router-outlet>
+    <input id="objectId" type="text" formControlName="objectId" />
+    <button (click)="goBack()">go back</button>
+  </form>
+
+  <router-outlet></router-outlet>

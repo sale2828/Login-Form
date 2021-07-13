@@ -1,4 +1,3 @@
-import { ComponentCanDeactivate } from './../component-can-deactivate';
 import { LoginService } from '../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { ɵROUTER_PROVIDERS } from '@angular/router';
@@ -10,14 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-form.component.css'],
   providers: [ɵROUTER_PROVIDERS],
 })
-export class LoginFormComponent implements OnInit, ComponentCanDeactivate {
-  canDeactivate(): boolean {
-    return !this.isDirty;
-  }
+export class LoginFormComponent implements OnInit {
 
   _username = '';
   _password = '';
-  isDirty = false;
 
   constructor(private route: Router, private logIn: LoginService) {}
 

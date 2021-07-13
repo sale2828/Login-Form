@@ -1,24 +1,42 @@
+import { LoginFormComponent } from './../login-form/login-form.component';
 import { ActivatedRoute } from '@angular/router';
 import { ObjectService } from '../services/object.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Object } from '../object';
 import { Location } from '@angular/common';
-import { ComponentCanDeactivate } from '../component-can-deactivate';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-object-detail',
   templateUrl: './object-detail.component.html',
   styleUrls: ['./object-detail.component.css'],
 })
-export class ObjectDetailComponent implements OnInit, ComponentCanDeactivate {
-  isDirty = false;
+export class ObjectDetailComponent implements OnInit {
+
   object: Object | undefined;
+  objectDetails: FormGroup;
+
 
   constructor(
     private objectService: ObjectService,
     private route: ActivatedRoute,
-    private location: Location
-  ) {}
+    private location: Location,
+
+  ) {
+    this.objectDetails = new FormGroup({
+      objectName: new FormControl,
+      objectId: new FormControl
+    }
+    ),
+      this.objectDetails.valueChanges.subscribe(() => {
+        window.addEventListener('beforeunload',
+          (event) => {
+            event.returnValue('You have unsaved data. Are you sure you want to reload?')
+          });
+      });
+  }
+
+
 
   ngOnInit(): void {
     this.getObject();
@@ -36,10 +54,7 @@ export class ObjectDetailComponent implements OnInit, ComponentCanDeactivate {
   }
 
   canDeactivate(): boolean {
-    return !this.isDirty;
+    return !this.objectDetails.dirty;
   }
 
-  save() {
-    this.isDirty = false;
-  }
 }

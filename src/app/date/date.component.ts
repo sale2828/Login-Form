@@ -24,20 +24,15 @@ export class DateComponent implements OnInit {
 
   loadDateTime() {
     this.unSubscribe();
-    this.getDateTime().pipe(takeUntil(this._subIfTrue)).subscribe(x => { this.getDateTime() });
-    interval(5000000).pipe(takeUntil(this._subIfTrue)).subscribe(
-      () => {
-        this.getDateTime().subscribe();
-      }
-    );
+    this.getDateTime().pipe(takeUntil(this._subIfTrue)).subscribe(() => { interval(6000000).pipe(takeUntil(this._subIfTrue)).subscribe(() => { this.getDateTime().subscribe()}) });
   };
 
 
-  private getDateTime(): Observable<void> {
-
-    return this.dateTimeService.getCurrentDateTime()
-      .pipe(takeUntil(this._subIfTrue), map(x => { this.dateTimeService.setCurrentDateTime(x) }));
-
+  private getDateTime(): Observable<any> {
+    return this.dateTimeService.getCurrentDateTime().pipe(takeUntil(this._subIfTrue), map(data => {
+      console.log(data);
+      this.dateTimeService.setCurrentDateTime(data.dateTime);
+    }));
   }
 
 

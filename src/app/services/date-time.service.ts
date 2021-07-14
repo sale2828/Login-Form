@@ -9,13 +9,21 @@ export class DateTimeService {
 
   constructor(private http: HttpClient) { }
 
-  currentDateTime: any;
+ private currentDateTime: any;
 
   getCurrentDateTime(): Observable<any> {
-    return this.http.get('https://localhost:44395/api/Date');
+    return this.http.get('https://localhost:44395/api/Date',);
   }
 
   setCurrentDateTime(date: any) {
-     this.currentDateTime = date;
+    this.currentDateTime = date;
   }
+
+  displayCurrentDateTime() {
+    return this.currentDateTime;
+  }
+
 }
+
+
+

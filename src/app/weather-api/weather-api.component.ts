@@ -48,9 +48,6 @@ export class WeatherApiComponent implements OnInit {
 
   }
 
-  refreshWeather() {
-    this.count$ = interval(3000).pipe(takeUntil(this._subIfTrue)).subscribe(data => this.weatherService.getWeatherData(this.weatherService.currentCity));
-  }
 
   unSubscribe() {
     this._subIfTrue.next();

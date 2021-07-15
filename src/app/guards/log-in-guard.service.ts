@@ -1,4 +1,4 @@
-import { PATHS } from '../paths';
+import { PATHS } from '../../helpers/paths';
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
@@ -13,11 +13,10 @@ import { LoginService } from '../services/login.service';
   providedIn: 'root',
 })
 export class LogInGuardService implements CanActivate {
-  constructor(private _router: Router, private userInfo: LoginService) {}
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+
+  constructor(private _router: Router, private userInfo: LoginService) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (!this.userInfo.isUserLoggedIn()) {
       return true;
     } else {

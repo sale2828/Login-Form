@@ -10,19 +10,25 @@ import { LoggedInPageComponent } from './logged-in-page/logged-in-page.component
 import { HomepageGuardService } from './guards/homepage-guard.service';
 import { LogInGuardService } from './guards/log-in-guard.service';
 import { WeatherApiComponent } from './weather-api/weather-api.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DateComponent } from './date/date.component';
+import { JwtInterceptor } from 'src/helpers/jwt.interceptor';
+import { ErrorInterceptor } from 'src/helpers/error.interceptor';
+import { fakeBackendProvider } from 'src/helpers/fake-backend.interceptor';
+import { RandomObjectComponent } from './random-object/random-object.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginFormComponent,
     HomepageComponent,
+    LoginFormComponent,
     LoggedInPageComponent,
     WeatherApiComponent,
     ObjectDetailComponent,
     DateComponent,
+    RandomObjectComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +37,13 @@ import { DateComponent } from './date/date.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [HomepageGuardService, LogInGuardService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+
+    // provider used to create fake backend
+    // fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

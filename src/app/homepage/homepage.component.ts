@@ -1,7 +1,10 @@
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Component, OnInit} from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { ObjectService } from '../services/object.service';
-import { Object } from './../object';
+import { Object } from '../../helpers/object';
+import { Router } from '@angular/router';
+import { PATHS } from 'src/helpers/paths';
 
 
 @Component({
@@ -17,20 +20,23 @@ export class HomepageComponent implements OnInit {
 
 
   constructor(
-    private logOut: LoginService,
-    private objectService: ObjectService
+    private authenticationService: AuthenticationService,
+    private objectService: ObjectService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getObjects();
   }
 
-  logout(): void {
-    this.logOut.logout();
-  }
-
-
   getObjects(): void {
     this.objectService.getObjects().subscribe(objects => this.objects = objects);
   }
+
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate([PATHS.LOGIN_FORM]);
+  }
 }
+

@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { ObjectDetailComponent } from '../object-detail/object-detail.component';
 
+
 @Injectable({
   providedIn: 'root',
 })

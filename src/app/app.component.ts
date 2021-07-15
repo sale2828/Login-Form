@@ -1,5 +1,9 @@
+import { AuthenticationService } from './services/authentication.service';
 import { Component } from '@angular/core';
+import { User } from 'src/helpers/user';
 import { LoginService } from './services/login.service';
+import { Router } from '@angular/router';
+import { PATHS } from 'src/helpers/paths';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +12,22 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
 
-  title = 'Welcome';
-  navMenu = this.loginService;
 
+  //dodati za ngif u htmlu
+  currentUser?: User;
+
+  title = 'Welcome';
 
   constructor(
-    private loginService: LoginService
-  )
-  {
-    loginService.checkOnRefresh();
+    private authenticationService: AuthenticationService,
+    private router: Router,
+  ) {
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
-
+logout() {
+  this.authenticationService.logout();
+  this.router.navigate([PATHS.LOGIN_FORM]);
+}
 
 }

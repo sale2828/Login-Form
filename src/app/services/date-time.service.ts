@@ -12,7 +12,7 @@ export class DateTimeService {
  private currentDateTime: any;
 
   getCurrentDateTime(): Observable<any> {
-    return this.http.get('https://localhost:44395/api/Date',);
+    return this.http.get('https://localhost:44395/api/Date');
   }
 
   setCurrentDateTime(date: any) {

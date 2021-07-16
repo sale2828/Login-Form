@@ -12,10 +12,11 @@ import { HomepageGuardService } from './guards/homepage-guard.service';
 const routes: Routes = [
 
 
-   {
+
+  {
     path: '',
-    component: HomepageComponent,
-    canActivate: [AuthGuard],
+    redirectTo: PATHS.HOMEPAGE,
+    pathMatch: 'full'
   },
   {
     path: 'object/:name/:id',
@@ -33,11 +34,17 @@ const routes: Routes = [
     component: LoginFormComponent,
     canActivate: [HomepageGuardService],
   },
-
+  {
+    path: "products",
+    loadChildren: () => import('./products/products.module').then(mod => mod.ProductsModule)
+  },
   {
     path: PATHS.DEFAULT,
-    redirectTo: ''
+    redirectTo: PATHS.HOMEPAGE,
+    pathMatch: 'full'
   },
+
+
 
 ];
 

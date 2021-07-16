@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoggedInPageComponent } from './logged-in-page/logged-in-page.component';
-import { HomepageGuardService } from './guards/homepage-guard.service';
-import { LogInGuardService } from './guards/log-in-guard.service';
 import { WeatherApiComponent } from './weather-api/weather-api.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DateComponent } from './date/date.component';
@@ -16,7 +14,7 @@ import { JwtInterceptor } from 'src/helpers/jwt.interceptor';
 import { ErrorInterceptor } from 'src/helpers/error.interceptor';
 import { fakeBackendProvider } from 'src/helpers/fake-backend.interceptor';
 import { RandomObjectComponent } from './random-object/random-object.component';
-import { AuthGuard } from './guards/auth.guard';
+import { ProductsModule } from './products/products.module';
 
 
 @NgModule({
@@ -36,6 +34,10 @@ import { AuthGuard } from './guards/auth.guard';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    ProductsModule
+  ],
+  exports: [
+    RandomObjectComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

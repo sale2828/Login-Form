@@ -24,7 +24,7 @@ export class DateComponent implements OnInit {
 
   loadDateTime() {
     this.unSubscribe();
-    this.getDateTime().pipe(takeUntil(this._subIfTrue)).subscribe(() => { interval(6000000).pipe(takeUntil(this._subIfTrue)).subscribe(() => { this.getDateTime().subscribe()}) });
+    this.getDateTime().pipe(takeUntil(this._subIfTrue)).subscribe(() => { interval(1000).pipe(takeUntil(this._subIfTrue)).subscribe(() => { this.getDateTime().subscribe()}) });
   };
 
 

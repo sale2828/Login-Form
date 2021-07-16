@@ -1,3 +1,4 @@
+import { HttpRequest } from '@angular/common/http';
 import { state } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
@@ -11,18 +12,20 @@ import { AuthenticationService } from '../services/authentication.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
-) { }
+    private authenticationService: AuthenticationService,
+  ) { }
 
-canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
-        // logged in so return true
-        return true;
+
+
+      // logged in so return true
+      return true;
     }
 
     // not logged in so redirect to login page with the return url
     this.router.navigate([PATHS.LOGIN_FORM], { queryParams: { returnUrl: state.url } });
     return false;
-}
+  }
 }

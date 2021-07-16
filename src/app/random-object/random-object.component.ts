@@ -10,8 +10,7 @@ import { Object } from 'src/helpers/object';
 })
 export class RandomObjectComponent implements OnInit {
 
-
-  object: Object | undefined;
+  objects: Object[] = [];
 
   constructor(
     private objectService: ObjectService,
@@ -19,13 +18,11 @@ export class RandomObjectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getObject();
+    this.getObjects();
   }
 
-  getObject(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.objectService.getObject(id)
-      .subscribe(object => this.object = object);
+  getObjects(): void {
+    this.objectService.getObjects().subscribe(objects => this.objects = objects);
   }
 
 }

@@ -32,7 +32,7 @@ export class WeatherApiComponent implements OnInit {
     this.counter = 0;
     this.unSubscribe();
     this.getWeather(this._selectedCity).pipe(takeUntil(this._subIfTrue)).subscribe(() => {
-      interval(60000).pipe(takeUntil(this._subIfTrue)).subscribe(
+      interval(10000*600).pipe(takeUntil(this._subIfTrue)).subscribe(
         () => {
           this.getWeather(this._selectedCity).subscribe();
           this.counter++;

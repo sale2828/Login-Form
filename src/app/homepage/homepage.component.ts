@@ -26,12 +26,9 @@ export class HomepageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getObjects();
   }
 
-  getObjects(): void {
-    this.objectService.getObjects().subscribe(objects => this.objects = objects);
-  }
+
 
 
   logout() {

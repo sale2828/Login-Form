@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class DateTimeService {
  private currentDateTime: any;
 
   getCurrentDateTime(): Observable<any> {
-    return this.http.get('https://localhost:44395/api/Date');
+    return this.http.get(`${environment.apiUrl}/DateTime`);
   }
 
   setCurrentDateTime(date: any) {

@@ -10,7 +10,7 @@ import { takeUntil, map } from 'rxjs/operators';
 })
 export class WeatherApiComponent implements OnInit {
 
-  _selectedCity: string = 'London';
+  _selectedCity: string = 'Belgrade';
   _subIfTrue: Subject<any> = new Subject<any>();
   count$: any;
   counter = 0;

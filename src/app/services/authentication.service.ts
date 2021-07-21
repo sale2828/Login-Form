@@ -10,36 +10,34 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthenticationService {
 
-  private currentUserSubject: BehaviorSubject<User>;
+  private currentTokenSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as any));
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentTokenSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser') as any));
+    console.log(this.currentTokenSubject);
+    this.currentUser = this.currentTokenSubject.asObservable();
   }
 
   public get currentUserValue(): User {
-    return this.currentUserSubject.value;
+    return this.currentTokenSubject.value;
   }
 
   login(username: string, password: string) {
-    const now = new Date()
-    return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
+    return this.http.post<any>(`${environment.apiUrl}/home/login`, { username, password })
       .pipe(map(user => {
 
 
         //store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
+        localStorage.setItem('currentUser', JSON.stringify(user, ["token"]));
+        this.currentTokenSubject.next(user);
         return user;
       }));
   }
 
-
-
   logout() {
     //remove user from local storage to log user out
     localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null as any);
+    this.currentTokenSubject.next(null as any);
   }
 }

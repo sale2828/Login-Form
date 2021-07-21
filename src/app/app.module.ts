@@ -1,3 +1,4 @@
+import { CommonComponent } from './CommonComponent/common.component';
 import { ObjectDetailComponent } from './object-detail/object-detail.component';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,6 +41,7 @@ import { ProductsModule } from './products/products.module';
     RandomObjectComponent,
   ],
   providers: [
+    CommonComponent,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 

@@ -31,7 +31,7 @@ export class ObjectDetailComponent implements OnInit {
       this.objectDetails.valueChanges.subscribe(() => {
         window.addEventListener('beforeunload',
           (event) => {
-            event.returnValue('You have unsaved data. Are you sure you want to reload?')
+            event.returnValue
           });
       });
   }

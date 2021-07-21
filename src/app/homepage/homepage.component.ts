@@ -1,7 +1,5 @@
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Component, OnInit} from '@angular/core';
-import { LoginService } from '../services/login.service';
-import { ObjectService } from '../services/object.service';
 import { Object } from '../../helpers/object';
 import { Router } from '@angular/router';
 import { PATHS } from 'src/helpers/paths';
@@ -21,7 +19,6 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private objectService: ObjectService,
     private router: Router
   ) { }
 

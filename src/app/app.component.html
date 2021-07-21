@@ -1,4 +1,4 @@
-<h1>{{title}}</h1>
+<h1>{{title}} <span style="float:right">{{authenticationService.currentUsername}}</span></h1>
 <div>
   <a routerLink="/homepage" routerLinkActive="active">Home page </a>
   <a routerLink="/login_form" routerLinkActive="active">Login </a>
@@ -6,9 +6,5 @@
   <a routerLink="/products/sale" routerLinkActive="active">Sale </a>
 </div>
 
-
-<div>
-  <span style="float:right">here</span>
-</div>
 
 <router-outlet></router-outlet>

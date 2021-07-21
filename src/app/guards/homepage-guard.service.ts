@@ -1,5 +1,4 @@
 import { PATHS } from '../../helpers/paths';
-import { LoginService } from '../services/login.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
@@ -12,7 +11,6 @@ export class HomepageGuardService implements CanActivate {
 
   constructor(
     private _router: Router,
-    private userInfo: LoginService,
     private authenticationService: AuthenticationService
     ) {
 

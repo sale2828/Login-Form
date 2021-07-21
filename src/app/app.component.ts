@@ -1,9 +1,10 @@
+import { CommonComponent } from './CommonComponent/common.component';
 import { AuthenticationService } from './services/authentication.service';
 import { Component } from '@angular/core';
 import { User } from 'src/helpers/user';
-import { LoginService } from './services/login.service';
 import { Router } from '@angular/router';
 import { PATHS } from 'src/helpers/paths';
+import { first, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -19,14 +20,34 @@ export class AppComponent {
   title = 'Welcome';
 
   constructor(
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
+    private common: CommonComponent,
     private router: Router,
+
   ) {
   }
 
-logout() {
-  this.authenticationService.logout();
-  this.router.navigate([PATHS.LOGIN_FORM]);
-}
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate([PATHS.LOGIN_FORM]);
+  }
+
+  ngOnInit(): void {
+    this.authenticationService.onInit();
+  }
+
+
+
+  //   <div *ngIf= "authenticationService.currentUsername">
+  //   <span style="float:right">{{authenticationService.currentUsername}}</span>
+  // </div>
+
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.common.unSubscribe();
+  }
+
 
 }

@@ -52,7 +52,7 @@ export class LoginFormComponent implements OnInit {
       .subscribe(
         {
           next: () => {
-            this.authenticationService.onInit();
+            // this.authenticationService.onInit();
             // get return url from route parameters or default to '/'
             const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
             this.router.navigate([returnUrl]);
@@ -63,5 +63,4 @@ export class LoginFormComponent implements OnInit {
           }
         });
   }
-
 }

@@ -16,7 +16,7 @@ export class AppComponent {
 
   //dodati za ngif u htmlu
   currentUser?: User;
-
+  user!: User;
   title = 'Welcome';
 
   constructor(
@@ -25,15 +25,15 @@ export class AppComponent {
     private router: Router,
 
   ) {
+    this.authenticationService.user.subscribe(x => this.user = x);
   }
 
   logout() {
     this.authenticationService.logout();
-    this.router.navigate([PATHS.LOGIN_FORM]);
   }
 
   ngOnInit(): void {
-    this.authenticationService.onInit();
+    // this.authenticationService.onInit();
   }
 
 

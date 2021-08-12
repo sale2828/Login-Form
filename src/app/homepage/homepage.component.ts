@@ -30,7 +30,6 @@ export class HomepageComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
-    this.router.navigate([PATHS.LOGIN_FORM]);
   }
 }
 

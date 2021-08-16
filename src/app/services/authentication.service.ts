@@ -1,7 +1,7 @@
 import { CommonComponent } from './../CommonComponent/common.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ObservableLike } from 'rxjs';
 import { User } from 'src/helpers/user';
 import { first, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -32,7 +32,7 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/home/login`, { username, password }, {withCredentials: true})
+    return this.http.post<any>(`${environment.apiUrl}/home/login`, { username, password }, { withCredentials: true })
       .pipe(map(user => {
         //store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -59,7 +59,6 @@ export class AuthenticationService {
 
   logout() {
     //remove user from local storage to log user out
-    this.http.post<any>(`${environment.apiUrl}/home/revoke-token`, {}, {withCredentials: true}).subscribe();
     localStorage.removeItem('currentUser');
     this.userSubject.next(null as any);
     // if (this.currentUser.value) {
@@ -70,10 +69,9 @@ export class AuthenticationService {
   }
 
   refreshToken() {
-    return this.http.post<any>(`${environment.apiUrl}/home/refresh-token`, {}, {withCredentials: true})
-    .pipe(map(user => {
+    return this.http.post<any>(`${environment.apiUrl}/home/refresh-token`, {}, { withCredentials: true }).pipe(map(user => {
+      localStorage.setItem('currentUser', JSON.stringify(user));
       this.userSubject.next(user);
-      return user;
     }));
   }
 }

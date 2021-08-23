@@ -1,7 +1,7 @@
-import { OBJECTS } from '../../helpers/objects';
+import { OBJECTS } from '../helpers/objects';
 import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Object } from '../../helpers/object';
+import { Object } from '../helpers/object';
 
 @Injectable({
   providedIn: 'root'

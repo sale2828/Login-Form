@@ -1,3 +1,4 @@
+import { Token } from './token';
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
@@ -6,7 +7,7 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, filter, map, switchMap, take } from 'rxjs/operators';
+import { catchError, filter, finalize, map, switchMap, take } from 'rxjs/operators';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Injectable()
@@ -30,6 +31,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return throwError(err);
       }
       if (this.refreshTokenInProgress) {
+        console.log(" shouldnt be here");
         return this.refreshTokenSubject.pipe(
           filter(result => result != null),
           take(1),
@@ -38,25 +40,36 @@ export class ErrorInterceptor implements HttpInterceptor {
           ));
       }
       else {
+
         this.refreshTokenInProgress = true;
         this.refreshTokenSubject.next(null);
-
         return this.authenticationService.
-          refreshToken().
-          switchMap((token: any) => {
-          this.refreshTokenInProgress = false;
-          this.refreshTokenSubject.next(token);
-
-          return next.handle(this.addAuthenticationToken(request));
-        }))
-        .catch((err: any) => {
-          this.refreshTokenInProgress = false;
-
-          this.auth.logout();
-          return throwError(err);
-      });
+          refreshToken().pipe(
+            switchMap((user: any) => {
+              this.refreshTokenInProgress = false;
+              this.refreshTokenSubject.next(user);
+              return next.handle(this.addAuthenticationToken(request));
+            }),
+             finalize(() => (this.refreshTokenInProgress = false)),
+          );
       }
     }))
   }
 
+  addAuthenticationToken(request: HttpRequest<any>) {
+
+    const currentUser = this.authenticationService.currentUserValue;
+    if (!currentUser.token) {
+      return request;
+    }
+    return request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${currentUser.token}`
+      }
+    });
+  }
+
 }
+
+
+

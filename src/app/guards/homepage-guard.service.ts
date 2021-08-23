@@ -1,4 +1,4 @@
-import { PATHS } from '../../helpers/paths';
+import { PATHS } from '../helpers/paths';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';

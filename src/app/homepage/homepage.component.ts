@@ -1,8 +1,8 @@
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Component, OnInit} from '@angular/core';
-import { Object } from '../../helpers/object';
+import { Object } from '../helpers/object';
 import { Router } from '@angular/router';
-import { PATHS } from 'src/helpers/paths';
+import { PATHS } from 'src/app/helpers/paths';
 
 
 @Component({

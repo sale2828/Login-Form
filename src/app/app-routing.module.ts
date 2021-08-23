@@ -1,6 +1,6 @@
 import { DirtycheckGuard } from './guards/dirtycheck.guard';
 import { ObjectDetailComponent } from './object-detail/object-detail.component';
-import { PATHS } from '../helpers/paths';
+import { PATHS } from './helpers/paths';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';

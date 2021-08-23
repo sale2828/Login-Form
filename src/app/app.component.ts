@@ -1,9 +1,9 @@
 import { CommonComponent } from './CommonComponent/common.component';
 import { AuthenticationService } from './services/authentication.service';
 import { Component } from '@angular/core';
-import { User } from 'src/helpers/user';
+import { User } from 'src/app/helpers/user';
 import { Router } from '@angular/router';
-import { PATHS } from 'src/helpers/paths';
+import { PATHS } from 'src/app/helpers/paths';
 import { first, takeUntil } from 'rxjs/operators';
 
 @Component({

@@ -1,5 +1,5 @@
 import { SaleComponent } from './sale/sale.component';
-import { PATHS } from 'src/helpers/paths';
+import { PATHS } from 'src/app/helpers/paths';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MisecellaneousComponent } from './misecellaneous/misecellaneous.component';

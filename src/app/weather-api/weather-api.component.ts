@@ -12,11 +12,10 @@ export class WeatherApiComponent implements OnInit {
 
   _selectedCity: string = 'Belgrade';
   _subIfTrue: Subject<any> = new Subject<any>();
-  count$: any;
   counter = 0;
+  values = '';
 
   constructor(public weatherService: WeatherService) { }
-
 
 
 
@@ -32,7 +31,7 @@ export class WeatherApiComponent implements OnInit {
     this.counter = 0;
     this.unSubscribe();
     this.getWeather(this._selectedCity).pipe(takeUntil(this._subIfTrue)).subscribe(() => {
-      interval(10000*600).pipe(takeUntil(this._subIfTrue)).subscribe(
+      interval(10000 * 600).pipe(takeUntil(this._subIfTrue)).subscribe(
         () => {
           this.getWeather(this._selectedCity).subscribe();
           this.counter++;

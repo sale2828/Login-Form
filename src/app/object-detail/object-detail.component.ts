@@ -2,7 +2,7 @@ import { LoginFormComponent } from './../login-form/login-form.component';
 import { ActivatedRoute } from '@angular/router';
 import { ObjectService } from '../services/object.service';
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Object } from '../../helpers/object';
+import { Object } from '../helpers/object';
 import { Location } from '@angular/common';
 import { FormControl, FormGroup } from '@angular/forms';
 

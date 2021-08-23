@@ -1,7 +1,7 @@
 <label for="selectedCity" value="">Select City</label>
 <div>
     <button (click)="this.loadWeather()">Go</button>
-    <input id="selectedCity" [(ngModel)]="_selectedCity" placeholder="selectedCity" />
+    <input (keyup.enter)="this.loadWeather()" id="selectedCity" [(ngModel)]="_selectedCity" placeholder="selectedCity" />
 </div>
 
 <div id="divWeatherMain">

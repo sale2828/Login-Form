@@ -1,7 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { ObjectService } from '../services/object.service';
 import { Component, OnInit } from '@angular/core';
-import { Object } from 'src/helpers/object';
+import { Object } from 'src/app/helpers/object';
 
 @Component({
   selector: 'app-random-object',

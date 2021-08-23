@@ -11,9 +11,9 @@ import { LoggedInPageComponent } from './logged-in-page/logged-in-page.component
 import { WeatherApiComponent } from './weather-api/weather-api.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DateComponent } from './date/date.component';
-import { JwtInterceptor } from 'src/helpers/jwt.interceptor';
-import { ErrorInterceptor } from 'src/helpers/error.interceptor';
-import { fakeBackendProvider } from 'src/helpers/fake-backend.interceptor';
+import { JwtInterceptor } from 'src/app/helpers/jwt.interceptor';
+import { ErrorInterceptor } from 'src/app/helpers/error.interceptor';
+import { fakeBackendProvider } from 'src/app/helpers/fake-backend.interceptor';
 import { RandomObjectComponent } from './random-object/random-object.component';
 import { ProductsModule } from './products/products.module';
 

@@ -2,11 +2,11 @@ import { CommonComponent } from './../CommonComponent/common.component';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, ObservableLike } from 'rxjs';
-import { User } from 'src/helpers/user';
+import { User } from 'src/app/helpers/user';
 import { first, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { PATHS } from 'src/helpers/paths';
+import { PATHS } from 'src/app/helpers/paths';
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +68,7 @@ export class AuthenticationService {
     this.router.navigate([PATHS.LOGIN_FORM]);
   }
 
-  refreshToken() {
+  refreshToken(): Observable<any>{
     return this.http.post<any>(`${environment.apiUrl}/home/refresh-token`, {}, { withCredentials: true }).pipe(map(user => {
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.userSubject.next(user);
